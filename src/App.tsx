@@ -1,57 +1,82 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import styled, { createGlobalStyle } from "styled-components";
+import { Routes, Route } from "react-router-dom";
+import Authorization from "./components/Forms/Authorization";
+import Registration from "./components/Forms/Registration";
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif; 
+    color: #fff;
+  }
+
+  body {
+    overflow-x: hidden;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    background-color: #1B2427;
+  }
+
+  button,
+  input {
+    border: none;
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+`;
+
+const AppWrapper = styled.div`
+  position: relative;
+  max-width: 1160px;
+  padding: 0 10px;
+  margin: 0 auto;
+  height: 100vh;
+`;
+
+export const Form = styled.form`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #171f22;
+  border-radius: 20px;
+  width: 340px;
+  min-height: 300px;
+  padding: 20px 35px 45px;
+  box-shadow: 0px 0px 14px 6px rgba(7, 8, 9, 0.25);
+`;
+
+export const FormTitle = styled.h2`
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 30px;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <AppWrapper>
+      <Routes>
+        <Route path="/" element={<Authorization />} />
+        <Route path="/registration" element={<Registration />} />
+      </Routes>
+      <GlobalStyle />
+    </AppWrapper>
   );
 }
 
