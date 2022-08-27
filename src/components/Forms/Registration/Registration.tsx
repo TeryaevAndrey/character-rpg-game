@@ -1,8 +1,8 @@
-import { Form, FormTitle } from "../../App";
-import FormInput from "./FormInput/FormInput";
-import FormBtn from "./FormBtn/FormBtn";
-import { Inputs } from "../../App";
-import FormLink from "./FormLink/FormLink";
+import { Form, FormTitle } from "../../../App";
+import FormInput from "../FormInput/FormInput";
+import FormBtn from "../FormBtn/FormBtn";
+import { Inputs } from "../../../App";
+import FormLink from "../FormLink/FormLink";
 
 const Registration = () => {
   return (

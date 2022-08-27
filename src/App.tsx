@@ -1,7 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import Authorization from "./components/Forms/Authorization";
-import Registration from "./components/Forms/Registration";
+import Character from "./pages/Character/Character";
+import Authorization from "./components/Forms/Authorization/Authorization";
+import Registration from "./components/Forms/Registration/Registration";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -74,6 +75,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Authorization />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/character" element={<Character />} />
       </Routes>
       <GlobalStyle />
     </AppWrapper>
