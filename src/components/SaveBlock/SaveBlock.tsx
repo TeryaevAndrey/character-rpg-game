@@ -13,6 +13,7 @@ const SaveBlockStyle = styled.div`
   padding: 55px 25px;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 `;
 
 const Title = styled.h2`

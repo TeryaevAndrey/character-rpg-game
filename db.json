@@ -1,19 +1,12 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": "c7dd6e10-26e4-11ed-ac28-d11982424ba4",
+      "email": "teryaev.2004@mail.ru",
+      "password": "1479314ade777"
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "character": [
+    
+  ]
 }

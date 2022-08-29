@@ -1,8 +1,11 @@
+import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import Character from "./pages/Character/Character";
+import Character from "./pages/Profile/Profile";
 import Authorization from "./components/Forms/Authorization/Authorization";
 import Registration from "./components/Forms/Registration/Registration";
+import { getDataUsers, setCurrentUser } from "./store/Store";
+import { useAppDispatch } from "./store/Hooks";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -69,13 +72,47 @@ export const Inputs = styled.div`
   margin-top: 30px;
 `;
 
+export const FormError = styled.span`
+  display: inline-block;
+  font-size: 10px;
+  color: #302020;
+`;
+
+export const FormInputStyle = styled.input`
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 25px;
+  background-color: #212a2e;
+  box-shadow: 0px 0px 10px rgba(93, 109, 115, 0.25);
+  border-radius: 10px;
+  font-size: 13px;
+`;
+
+export const ErrorText = styled.span`
+  display: inline-block;
+  font-size: 15px;
+  color: red;
+`;
+
+export const validEmail = (email: string) => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  return re.test(email);
+};
+
 function App() {
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(getDataUsers());
+  }, [])
+
   return (
     <AppWrapper>
       <Routes>
         <Route path="/" element={<Authorization />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/character" element={<Character />} />
+        <Route path="/profile" element={<Character />} />
       </Routes>
       <GlobalStyle />
     </AppWrapper>

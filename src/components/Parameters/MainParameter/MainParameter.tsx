@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import MinImg from "../../../img/min.svg";
 import PlusImg from "../../../img/plus.svg";
@@ -48,23 +49,28 @@ export const Count = styled.span`
   display: inline-block;
   font-size: 25px;
   font-weight: 700;
+  text-align: center;
+  width: 30px;
 `;
 
 interface ParameterProps {
   borderColor: string;
-  img: string;
+  img: any;
   title: string;
+  count: number;
+  decrement: Function;
+  increment: Function;
 }
 
-const MainParameter = ({ borderColor, img, title }: ParameterProps) => {
+const MainParameter = ({ borderColor, img, title, count, decrement, increment }: ParameterProps) => {
   return (
     <ParameterStyle borderColor={borderColor}>
       <Img src={img} alt="parameter" />
       <Title>{title}</Title>
       <Counter>
-        <CounterImg src={MinImg} alt="min" />
-        <Count>0</Count>
-        <CounterImg src={PlusImg} alt="plus" />
+        <CounterImg onClick={() => decrement()} src={MinImg} alt="min" />
+        <Count>{count}</Count>
+        <CounterImg onClick={() => increment()} src={PlusImg} alt="plus" />
       </Counter>
     </ParameterStyle>
   );

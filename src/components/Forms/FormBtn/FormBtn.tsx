@@ -19,7 +19,7 @@ interface FormBtnProps {
 }
 
 const FormBtn = ({ title }: FormBtnProps) => {
-  return <FormBtnStyle>{title}</FormBtnStyle>;
+  return <FormBtnStyle type="submit">{title}</FormBtnStyle>;
 };
 
 export default FormBtn;
