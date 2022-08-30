@@ -1,19 +1,26 @@
 import styled from 'styled-components';
 import Saves from './Saves/Saves';
 import SaveCurrent from './SaveCurrent/SaveCurrent';
+import { useAppDispatch } from '../../store/Hooks';
+import { setOpenSaveBlock } from '../../store/SaveBlock';
 
 const SaveBlockStyle = styled.div`
   width: 230px;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: #171F22;
-  padding: 55px 25px;
+  z-index: 1;
+`;
+
+const SaveBlockInner = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  z-index: 1;
+  padding: 55px 25px;
+  height: 100%;
 `;
 
 const Title = styled.h2`
@@ -29,13 +36,27 @@ const TitleText = styled.p`
   margin-top: 14px;
 `;
 
+const CloseBtn = styled.div`
+  transform: rotate(-45deg);
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+`;
+
 const SaveBlock = () => {
+  const dispatch = useAppDispatch();
+
   return(
     <SaveBlockStyle>
-      <Title>Сохранения</Title>
-      <TitleText>Макс.сохранений - 10</TitleText>
-      <Saves />
-      <SaveCurrent />
+      <SaveBlockInner>
+        <CloseBtn onClick={() => dispatch(setOpenSaveBlock(false))}>+</CloseBtn>
+        <Title>Сохранения</Title>
+        <TitleText>Макс.сохранений - 10</TitleText>
+        <Saves />
+        <SaveCurrent />
+      </SaveBlockInner>
     </SaveBlockStyle>
   );
 };

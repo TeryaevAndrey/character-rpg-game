@@ -6,7 +6,74 @@
       "password": "1479314ade777"
     }
   ],
-  "character": [
-    
+  "characters": [
+    {
+      "id": "97c10250-2865-11ed-875b-e381035f8446",
+      "currentUser": "c7dd6e10-26e4-11ed-ac28-d11982424ba4",
+      "mainParameters": {
+        "power": 5,
+        "dexterity": 5,
+        "intelligence": 5,
+        "charisma": 5
+      },
+      "secondParameters": {
+        "lifeForce": 8,
+        "evasion": 15,
+        "energy": 10
+      },
+      "skills": [
+        {
+          "name": "attack",
+          "value": 5,
+          "level": 0
+        },
+        {
+          "name": "stealth",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "shooting",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "learnability",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "survival",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "medicine",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "intimidation",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "insight",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "appearance",
+          "value": 0,
+          "level": 0
+        },
+        {
+          "name": "manipulation",
+          "value": 0,
+          "level": 0
+        }
+      ],
+      "currentName": "Бакуган"
+    }
   ]
 }

@@ -18,6 +18,10 @@ export const ParameterStyle = styled.div<ParameterStyleProps>`
   border: 1px solid ${(props) => props.borderColor};
   box-shadow: 0px 0px 10px rgba(93, 109, 115, 0.25);
   padding: 10px 25px;
+
+  @media(max-width: 350px) {
+    width: 100%;
+  }
 `;
 
 const Img = styled.img`
@@ -62,7 +66,14 @@ interface ParameterProps {
   increment: Function;
 }
 
-const MainParameter = ({ borderColor, img, title, count, decrement, increment }: ParameterProps) => {
+const MainParameter = ({
+  borderColor,
+  img,
+  title,
+  count,
+  decrement,
+  increment,
+}: ParameterProps) => {
   return (
     <ParameterStyle borderColor={borderColor}>
       <Img src={img} alt="parameter" />

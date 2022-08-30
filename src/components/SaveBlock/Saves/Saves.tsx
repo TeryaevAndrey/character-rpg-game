@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAppSelector } from "../../../store/Hooks";
 import Save from "../Save/Save";
 
 const SavesStyle = styled.div`
@@ -10,9 +11,16 @@ const SavesStyle = styled.div`
 `;
 
 const Saves = () => {
+  const characters = useAppSelector((state) => state.main.dataCharacters);
+  const currentUser = useAppSelector((state) => state.main.currentUser);
+
   return(
     <SavesStyle>
-      <Save title="Оронгутанг" />
+      {
+        characters.map((character) => (
+          character.currentUser === currentUser && <Save key={character.id} title={character.currentName} id={character.id} />
+        ))
+      }
     </SavesStyle>
   );
 };

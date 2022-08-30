@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { FormInputStyle } from "../../../App";
+import { SubmitHandler, useForm } from "react-hook-form";
 import FormBtn from "../../Forms/FormBtn/FormBtn";
 import { FormTitle } from "../../../App";
 import { Inputs } from "../../../App";
+import { useAppDispatch } from "../../../store/Hooks";
+import { setCurrentName, setOpenModal } from "../../../store/Name";
 
 const Modal = styled.div`
   width: 100%;
@@ -20,7 +23,7 @@ const Modal = styled.div`
   z-index: 2;
 `;
 
-const ModalInner = styled.div`
+const ModalInner = styled.form`
   position: relative;
   padding: 20px 35px 45px;
   background-color: #171f22;
@@ -39,14 +42,30 @@ const ModalClose = styled.div`
   cursor: pointer;
 `;
 
+interface NameForm {
+  name: string;
+}
+
 const EditName = () => {
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit } = useForm<NameForm>();
+
+  const onSubmit: SubmitHandler<NameForm> = (data) => {
+    dispatch(setCurrentName(data.name));
+    dispatch(setOpenModal(false));
+  };
+
   return (
     <Modal>
-      <ModalInner>
-        <ModalClose>+</ModalClose>
+      <ModalInner onSubmit={handleSubmit(onSubmit)}>
+        <ModalClose onClick={() => dispatch(setOpenModal(false))}>+</ModalClose>
         <FormTitle>Изменение имени</FormTitle>
         <Inputs>
-          <FormInputStyle type="text" placeholder="Новое имя" />
+          <FormInputStyle
+            {...register("name")}
+            type="text"
+            placeholder="Новое имя"
+          />
         </Inputs>
         <FormBtn title="Сохранить" />
       </ModalInner>

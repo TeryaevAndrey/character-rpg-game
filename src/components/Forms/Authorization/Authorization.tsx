@@ -7,7 +7,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../store/Hooks";
 import { useNavigate } from "react-router-dom";
 import { checkEmailError, checkPasswordError } from "../../../store/Authorization";
-import { setCurrentUser } from "../../../store/Store";
+import { getDataCharacters, setCurrentUser } from "../../../store/Store";
 
 interface AuthorizationData {
   email: string;
@@ -38,6 +38,7 @@ const Authorization = () => {
         localStorage.setItem("id", user.id);
         dispatch(checkEmailError(false));
         dispatch(checkPasswordError(false));
+        dispatch(getDataCharacters());
       }
     })
   };

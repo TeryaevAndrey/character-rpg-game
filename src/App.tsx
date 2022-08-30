@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Character from "./pages/Profile/Profile";
 import Authorization from "./components/Forms/Authorization/Authorization";
 import Registration from "./components/Forms/Registration/Registration";
-import { getDataUsers, setCurrentUser } from "./store/Store";
+import { getDataCharacters, getDataUsers } from "./store/Store";
 import { useAppDispatch } from "./store/Hooks";
 
 const GlobalStyle = createGlobalStyle`
@@ -40,7 +40,7 @@ const AppWrapper = styled.div`
   max-width: 1160px;
   padding: 0 10px;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const Form = styled.form`
@@ -105,7 +105,8 @@ function App() {
 
   React.useEffect(() => {
     dispatch(getDataUsers());
-  }, [])
+    dispatch(getDataCharacters());
+  }, [dispatch])
 
   return (
     <AppWrapper>

@@ -3,17 +3,27 @@ import MainParameters from "../../components/MainParameters/MainParameters";
 import SecondParameters from "../../components/SecondParameters/SecondParameters";
 import Name from "../../components/Name/Name";
 import Skills from "../../components/Skills/Skills";
-import SaveBlock from "../../components/SaveBlock/SaveBlock";
 import ExitImg from "../../img/exit.svg";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/Hooks";
+import { useAppDispatch, useAppSelector } from "../../store/Hooks";
 import { setCurrentUser } from "../../store/Store";
-// import EditName from "../../components/Name/EditName/EditName";
+import EditName from "../../components/Name/EditName/EditName";
+import { setOpenSaveBlock } from "../../store/SaveBlock";
+import SaveBlock from "../../components/SaveBlock/SaveBlock";
+
+const CharacterStyle = styled.div`
+  position: relative;
+`;
 
 const ParametersWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 50px;
+  flex-wrap: wrap;
+  
+  @media(max-width: 420px) {
+    justify-content: center;
+  }
 `;
 
 const Exit = styled.img `
@@ -26,11 +36,28 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 50px;
+  flex-wrap: wrap;
+  padding: 40px 0;
+
+  @media(max-width: 500px) {
+    gap: 10px;
+    padding: 20px 0;
+  }
+`;
+
+const SaveOpenBtn = styled.button`
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #12191b;
+  margin-left: auto;
 `;
 
 const Character = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  
+  const isName = useAppSelector((state) => state.name.isOpenModal);
+  const isSaveBlock = useAppSelector((state) => state.saveBlock.isSaveBlock);
 
   const exitFromProfile = () => {
     navigate("/");
@@ -39,19 +66,20 @@ const Character = () => {
   };
 
   return (
-    <div className="Character">
+    <CharacterStyle>
       <Header>
         <Name />
         <Exit onClick={exitFromProfile} src={ExitImg} alt="exit" />
+        <SaveOpenBtn onClick={() => dispatch(setOpenSaveBlock(true))}>Сохранения</SaveOpenBtn>
       </Header>
       <ParametersWrapper>
         <MainParameters />
         <SecondParameters />
       </ParametersWrapper>
       <Skills />
-      {/* <EditName /> */}
-      <SaveBlock />
-    </div>
+      {isName && <EditName />}
+      {isSaveBlock && <SaveBlock />}
+    </CharacterStyle>
   );
 };
 

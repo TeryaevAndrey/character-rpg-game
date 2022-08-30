@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import NameBg from "../../img/name-bg.png";
 import EditImg from "../../img/edit.svg";
+import { useAppDispatch, useAppSelector } from "../../store/Hooks";
+import { setOpenModal } from "../../store/Name";
 
 const NameWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 40px 0;
 `;
 
 const NameStyle = styled.div`
@@ -33,10 +34,13 @@ const NameEdit = styled.img`
 `;
 
 const Name = () => {
+  const dispatch = useAppDispatch();
+  const currentName = useAppSelector((state) => state.name.currentName);
+
   return (
     <NameWrapper>
-      <NameStyle>Тутанхамон</NameStyle>
-      <NameEdit src={EditImg} alt="edit" />
+      <NameStyle>{currentName}</NameStyle>
+      <NameEdit onClick={() => dispatch(setOpenModal(true))} src={EditImg} alt="edit" />
     </NameWrapper>
   );
 };

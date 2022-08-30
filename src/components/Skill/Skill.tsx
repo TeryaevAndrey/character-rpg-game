@@ -6,7 +6,7 @@ const Title = styled.span`
   display: inline-block;
   font-size: 16px;
   font-weight: 600;
-  max-width: 80px;
+  width: 80px;
   overflow: hidden;
 `;
 
@@ -20,6 +20,8 @@ const Count = styled.span`
   display: inline-block;
   font-size: 25px;
   font-weight: 700;
+  width: 20px;
+  margin-left: 10px;
 `;
 
 const Img = styled.img`
@@ -28,19 +30,27 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
+const Level = styled.p`
+  font-size: 14px;
+`;
+
 interface SkillProps {
   borderColor: string;
   title: string;
+  count: number;
+  increment: Function;
+  level: number;
 }
 
-const Skill = ({borderColor, title}: SkillProps) => {
+const Skill = ({borderColor, title, count, increment, level}: SkillProps) => {
   return(
-    <ParameterStyle style={{width: "205px"}} borderColor={borderColor}>
+    <ParameterStyle style={{width: "270px"}} borderColor={borderColor}>
       <Title>{title}</Title>
       <Counter>
-        <Count>0</Count>
-        <Img src={PlusImg} alt="plus" />
+        <Count>{count}</Count>
+        <Img onClick={() => increment()} src={PlusImg} alt="plus" />
       </Counter>
+      <Level>{level} level</Level>
     </ParameterStyle>
   );
 };

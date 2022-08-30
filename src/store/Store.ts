@@ -6,6 +6,9 @@ import {
 } from "@reduxjs/toolkit";
 import { RegistrationSlice } from "./Registration";
 import { AuthorizationSlice } from "./Authorization";
+import { CharacterSlice } from "./Character";
+import { NameSlice } from "./Name";
+import { SaveBlockSlice } from "./SaveBlock";
 import axios from "axios";
 
 interface User {
@@ -14,14 +17,25 @@ interface User {
   password: string;
 }
 
+interface Character {
+  id: string;
+  currentUser: string;
+  mainParameters: [];
+  secondParameters: [];
+  skills: [];
+  currentName: string;
+}
+
 interface InitialState {
   dataUsers: User[];
-  currentUser: string;
+  dataCharacters: Character[];
+  currentUser: string | null;
 }
 
 const initialState: InitialState = {
   dataUsers: [],
-  currentUser: "",
+  dataCharacters: [],
+  currentUser: "" || localStorage.getItem("id"),
 };
 
 export const getDataUsers = createAsyncThunk(
@@ -29,6 +43,14 @@ export const getDataUsers = createAsyncThunk(
   async (_, { dispatch }) => {
     const res = await axios.get("http://localhost:3001/users");
     dispatch(setDataUsers(res.data));
+  }
+);
+
+export const getDataCharacters = createAsyncThunk(
+  "dataCharacters/getDataCharacters",
+  async(_, {dispatch}) => {
+    const res = await axios.get("http://localhost:3001/characters");
+    dispatch(setDataCharacters(res.data));
   }
 );
 
@@ -42,6 +64,9 @@ const MainDataSlice = createSlice({
     setCurrentUser: (state, action: PayloadAction<string>) => {
       state.currentUser = action.payload;
     },
+    setDataCharacters: (state, action: PayloadAction<Character[]>) => {
+      state.dataCharacters = action.payload;
+    }
   },
 });
 
@@ -50,10 +75,13 @@ export const store = configureStore({
     registration: RegistrationSlice.reducer,
     authorization: AuthorizationSlice.reducer,
     main: MainDataSlice.reducer,
+    character: CharacterSlice.reducer,
+    name: NameSlice.reducer,
+    saveBlock: SaveBlockSlice.reducer,
   },
 });
 
-export const { setDataUsers, setCurrentUser } = MainDataSlice.actions;
+export const { setDataUsers, setCurrentUser, setDataCharacters } = MainDataSlice.actions;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -10,13 +10,18 @@ const Title = styled.span`
 interface SecondParameterProps {
   borderColor: string;
   title: string;
+  value: number;
 }
 
-const SecondParameter = ({ borderColor, title }: SecondParameterProps) => {
+const SecondParameter = ({
+  borderColor,
+  title,
+  value,
+}: SecondParameterProps) => {
   return (
     <ParameterStyle borderColor={borderColor}>
       <Title>{title}</Title>
-      <Count>0</Count>
+      <Count>{value}</Count>
     </ParameterStyle>
   );
 };

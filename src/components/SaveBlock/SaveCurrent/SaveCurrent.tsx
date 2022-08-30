@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import SaveImg from "../../../img/save.svg";
+import { useAppDispatch, useAppSelector } from "../../../store/Hooks";
+import {v1 as uuid} from "uuid";
+import axios from "axios";
+import { getDataCharacters } from "../../../store/Store";
 
 const SaveCurrentStyle = styled.div`
   display: flex;
@@ -24,10 +28,33 @@ const Img = styled.img`
 `;
 
 const SaveCurrent = () => {
+  const dispatch = useAppDispatch();
+
+  const currentUser = useAppSelector((state) => state.main.currentUser);
+  const mainParameters = useAppSelector((state) => state.character.mainParameters);
+  const secondParameters = useAppSelector((state) => state.character.secondParameters);
+  const skills = useAppSelector((state) => state.character.skills);
+  const currentName = useAppSelector((state) => state.name.currentName);
+
+  const saveCurrent = () => {
+    const info = {
+      id: uuid(),
+      currentUser,
+      mainParameters,
+      secondParameters,
+      skills,
+      currentName,
+    };
+
+    dispatch(getDataCharacters());
+    axios.post("http://localhost:3001/characters", info);
+    dispatch(getDataCharacters());
+  };
+
   return(
     <SaveCurrentStyle>
       <Title>Сохранить текущие параметры</Title>
-      <Img src={SaveImg} alt="save" />
+      <Img onClick={saveCurrent} src={SaveImg} alt="save" />
     </SaveCurrentStyle>
   );
 };

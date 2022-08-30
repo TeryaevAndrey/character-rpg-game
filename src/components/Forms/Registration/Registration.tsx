@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { v1 as uuid } from "uuid";
-import { setCurrentUser } from "../../../store/Store";
+import { getDataCharacters, setCurrentUser } from "../../../store/Store";
 
 interface RegistrationData {
   email: string;
@@ -68,6 +68,7 @@ const Registration = () => {
       dispatch(setCurrentUser(userData.id));
       localStorage.setItem("id", userData.id);
       navigate("/profile");
+      dispatch(getDataCharacters());
     }
   };
 
