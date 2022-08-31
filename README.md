@@ -1,3 +1,13 @@
+ПРИ СТАРТЕ ПРОЕКТА: 
+
+Перед всеми действиями в терминале пишем npm install
+
+1. Два разных терминала.
+2. В одном пишем команду npm start
+3. Во втором пишем команду npm run start:server
+4. Ждем пока откроется браузер с проектом
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
