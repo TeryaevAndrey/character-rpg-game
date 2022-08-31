@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useAppSelector } from "../../store/Hooks";
+import {useAppSelector} from "../../store/Hooks";
 import SecondParameter from "../Parameters/SecondParameter/SecondParameter";
 
 const SecondParametersStyle = styled.div`
@@ -10,25 +10,32 @@ const SecondParametersStyle = styled.div`
 `;
 
 const SecondParameters = () => {
-  const secondParameters = useAppSelector((state) => state.character.secondParameters);
+  const secondParametersData = useAppSelector((state) => state.character.secondParameters);
 
+  const secondParameters = [
+    {
+      name: "Жизненная сила",
+      value: secondParametersData.lifeForce,
+      borderColor: "#302020"
+    },
+    {
+      name: "Уклонение",
+      value: secondParametersData.evasion,
+      borderColor: "#37492C"
+    },
+    {
+      name: "Энергичность",
+      value: secondParametersData.energy,
+      borderColor: "#3B6C81"
+    },
+  ]
   return (
     <SecondParametersStyle>
-      <SecondParameter
-        borderColor="#302020"
-        title="Жизненная сила"
-        value={secondParameters.lifeForce}
-      />
-      <SecondParameter
-        borderColor="#37492C"
-        title="Уклонение"
-        value={secondParameters.evasion}
-      />
-      <SecondParameter
-        borderColor="#3B6C81"
-        title="Энергичность"
-        value={secondParameters.energy}
-      />
+      {
+        secondParameters.map((parameter) => (
+          <SecondParameter key={parameter.name} borderColor={parameter.borderColor} title={parameter.name} value={parameter.value} />
+        ))
+      }
     </SecondParametersStyle>
   );
 };

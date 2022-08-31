@@ -1,10 +1,12 @@
+import React from "react";
 import styled from "styled-components";
 import ImportImg from "../../../img/import.svg";
 import deleteImg from "../../../img/delete.svg";
+import {getDataCharacters} from "../../../store/Store";
+import {useAppDispatch} from "../../../store/Hooks";
 import axios from "axios";
-import { useAppDispatch } from "../../../store/Hooks";
-import { getDataCharacters } from "../../../store/Store";
-import { setMainParameters, setSecondParameters, setSkills } from "../../../store/Character";
+import {setMainParameters, setSecondParameters, setSkills} from "../../../store/Character";
+import { setCurrentName } from "../../../store/Name";
 
 const SaveStyle = styled.div`
   display: flex;
@@ -29,36 +31,38 @@ const Img = styled.img`
 `;
 
 interface SaveProps {
-  title: string;
-  id: string;
+    title: string;
+    id: string;
 }
 
-const Save = ({ title, id }: SaveProps) => {
-  const dispatch = useAppDispatch();
+const Save = ({title, id}: SaveProps) => {
+    const dispatch = useAppDispatch();
 
-  const deleteData = (id: string) => {
-    axios.delete(`http://localhost:3001/characters/${id}`);
-    dispatch(getDataCharacters());
-  };
+    const deleteData = (id: string) => {
+        dispatch(getDataCharacters());
+        axios.delete(`http://localhost:3001/characters/${id}`);
+        dispatch(getDataCharacters());
+    };
 
-  const importData = (idCharacter: string) => {
-    axios.get(`http://localhost:3001/characters/${idCharacter}`).then(res => {
-      let data = res.data;
-      
-      dispatch(setMainParameters(data.mainParameters));
-      dispatch(setSecondParameters(data.secondParameters));
-      dispatch(setSkills(data.skills));
-    });
+    const importData = (idCharacter: string) => {
+        axios.get(`http://localhost:3001/characters/${idCharacter}`).then(res => {
+            let data = res.data;
 
-  }
+            dispatch(setCurrentName(data.currentName))
+            dispatch(setMainParameters(data.mainParameters));
+            dispatch(setSecondParameters(data.secondParameters));
+            dispatch(setSkills(data.skills));
+        });
 
-  return (
-    <SaveStyle>
-      <Title>{title}</Title>
-      <Img onClick={() => deleteData(id)} src={deleteImg} alt="delete" />
-      <Img onClick={() => importData(id)} src={ImportImg} alt="import" />
-    </SaveStyle>
-  );
+    }
+
+    return (
+        <SaveStyle>
+            <Title>{title}</Title>
+            <Img onClick={() => deleteData(id)} src={deleteImg} alt="delete"/>
+            <Img onClick={() => importData(id)} src={ImportImg} alt="import"/>
+        </SaveStyle>
+    );
 };
 
 export default Save;

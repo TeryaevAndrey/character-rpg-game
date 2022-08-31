@@ -6,7 +6,7 @@ import Skills from "../../components/Skills/Skills";
 import ExitImg from "../../img/exit.svg";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/Hooks";
-import { setCurrentUser } from "../../store/Store";
+import { getDataUsers, setCurrentUser } from "../../store/Store";
 import EditName from "../../components/Name/EditName/EditName";
 import { setOpenSaveBlock } from "../../store/SaveBlock";
 import SaveBlock from "../../components/SaveBlock/SaveBlock";
@@ -63,6 +63,7 @@ const Character = () => {
     navigate("/");
     dispatch(setCurrentUser(""));
     localStorage.removeItem("id");
+    dispatch(getDataUsers());
   };
 
   return (

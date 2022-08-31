@@ -37,17 +37,17 @@ const Level = styled.p`
 interface SkillProps {
   borderColor: string;
   title: string;
-  count: number;
+  value: number;
   increment: Function;
   level: number;
 }
 
-const Skill = ({borderColor, title, count, increment, level}: SkillProps) => {
+const Skill = ({borderColor, title, value, increment, level}: SkillProps) => {
   return(
     <ParameterStyle style={{width: "270px"}} borderColor={borderColor}>
       <Title>{title}</Title>
       <Counter>
-        <Count>{count}</Count>
+        <Count>{value}</Count>
         <Img onClick={() => increment()} src={PlusImg} alt="plus" />
       </Counter>
       <Level>{level} level</Level>

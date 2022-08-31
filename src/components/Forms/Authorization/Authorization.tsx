@@ -32,6 +32,11 @@ const Authorization = () => {
         dispatch(checkPasswordError(true));
       }
 
+      if(!validEmail(data.email) && (data.password !== user.password || data.password.length < 0)) {
+        dispatch(checkEmailError(true));
+        dispatch(checkPasswordError(true));
+      }
+
       if(validEmail(data.email) && data.password === user.password) {
         navigate("/profile");
         dispatch(setCurrentUser(user.id));
@@ -40,7 +45,12 @@ const Authorization = () => {
         dispatch(checkPasswordError(false));
         dispatch(getDataCharacters());
       }
-    })
+    });
+
+    if(users.length < 1) {
+      dispatch(checkEmailError(true));
+        dispatch(checkPasswordError(true));
+    }
   };
   
 

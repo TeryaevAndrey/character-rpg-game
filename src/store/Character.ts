@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
+interface Skill {
+  name: string;
+  value: number;
+  level: number;
+}
+
 interface InitialState {
   mainParameters: {
-    power: number;
-    dexterity: number;
-    intelligence: number;
-    charisma: number;
+    power: number,
+    dexterity: number,
+    intelligence: number,
+    charisma: number,
   };
   secondParameters: {
-    lifeForce: number;
-    evasion: number;
-    energy: number;
+    lifeForce: number,
+    evasion: number,
+    energy: number,
   };
-  skills: [];
+  skills: Skill[];
 }
 
 const initialState: InitialState = {
@@ -28,30 +34,68 @@ const initialState: InitialState = {
     evasion: 0,
     energy: 0,
   },
-  skills: [],
+  skills: [
+    {
+      name: "attack",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "stealth",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "shooting",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "learnability",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "survival",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "medicine",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "intimidation",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "insight",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "appearance",
+      value: 0,
+      level: 0,
+    },
+    {
+      name: "manipulation",
+      value: 0,
+      level: 0,
+    },
+  ],
 };
-
-interface MainParameters {
-  power: number;
-  dexterity: number;
-  intelligence: number;
-  charisma: number;
-}
-
-interface SecondParameters {
-  lifeForce: number;
-  evasion: number;
-  energy: number;
-}
 
 export const CharacterSlice = createSlice({
   name: "character",
   initialState,
   reducers: {
-    setMainParameters: (state, action: PayloadAction<MainParameters>) => {
-      state.mainParameters = action.payload;
+    setMainParameters: (state, action) => {
+     state.mainParameters = action.payload;
     },
-    setSecondParameters: (state, action: PayloadAction<SecondParameters>) => {
+    setSecondParameters: (state, action) => {
       state.secondParameters = action.payload;
     },
     setSkills: (state, action) => {

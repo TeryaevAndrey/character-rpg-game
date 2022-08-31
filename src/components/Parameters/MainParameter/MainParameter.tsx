@@ -61,7 +61,7 @@ interface ParameterProps {
   borderColor: string;
   img: any;
   title: string;
-  count: number;
+  value: number;
   decrement: Function;
   increment: Function;
 }
@@ -70,7 +70,7 @@ const MainParameter = ({
   borderColor,
   img,
   title,
-  count,
+  value,
   decrement,
   increment,
 }: ParameterProps) => {
@@ -80,7 +80,7 @@ const MainParameter = ({
       <Title>{title}</Title>
       <Counter>
         <CounterImg onClick={() => decrement()} src={MinImg} alt="min" />
-        <Count>{count}</Count>
+        <Count>{value}</Count>
         <CounterImg onClick={() => increment()} src={PlusImg} alt="plus" />
       </Counter>
     </ParameterStyle>

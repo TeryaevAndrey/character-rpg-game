@@ -19,7 +19,7 @@ const Saves = () => {
       {
         characters.map((character) => (
           character.currentUser === currentUser && <Save key={character.id} title={character.currentName} id={character.id} />
-        ))
+        )).reverse()
       }
     </SavesStyle>
   );
